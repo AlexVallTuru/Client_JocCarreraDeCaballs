@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="467.0" prefWidth="770.0" spacing="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.MainController">
+    <padding>
+        <Insets bottom="50" left="50" right="50" top="50" />
+    </padding>
+
+    <TabPane prefHeight="407.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Menu Principal">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label prefHeight="126.0" prefWidth="409.0" text="CARRERA DE CARTES">
+                        <font>
+                            <Font size="35.0" />
+                        </font>
+                    </Label>
+                    <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="150" text="Jugar">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                    </Button>
+                    <Button onAction="#salirButtonAction" prefHeight="50" prefWidth="150" text="Salir">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                    </Button>
+                </VBox>
+            </Tab>
+            <Tab text="Hall Of Fame">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="Hall Of Fame" />
+                    <VBox spacing="10">
+                        <Label text="Jugadores" />
+                        <ListView fx:id="jugadoresListView" />
+                    </VBox>
+                    <VBox spacing="10">
+                        <Label text="Puntos" />
+                        <ListView fx:id="puntosListView" />
+                    </VBox>
+                </VBox>
+            </Tab>
+            <Tab text="Seleccionar Dificultad">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="Seleccionar Dificultad" />
+                    <CheckBox onAction="#dificultadNormalCheckBoxAction" text="Normal">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                    </CheckBox>
+                    <CheckBox onAction="#dificultadDificilCheckBoxAction" text="Difícil">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                    </CheckBox>
+                    <Label fx:id="dificultadLabel" text="" />
+                </VBox>
+            </Tab>
+        </tabs>
+    </TabPane>
+</VBox>

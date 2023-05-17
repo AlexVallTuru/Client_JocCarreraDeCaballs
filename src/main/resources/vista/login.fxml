@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextArea?>
 
 <VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.LoginController">
     <padding>
@@ -15,24 +16,23 @@
     </padding>
 
     <TabPane prefHeight="276.0" prefWidth="300.0">
-      <Tab text="Login" closable="false">
-         <content>
-            <VBox alignment="CENTER" spacing="10">
-               <padding>
-                  <Insets bottom="50" left="50" right="50" top="50" />
-               </padding>
-               <children>
-               
-                   <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inicio de sesión" />
-               
-                   <TextField fx:id="emailField" promptText="Email" style="-fx-prompt-text-fill: #aaa;" />
-                   <TextField fx:id="nicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa;" />
-               
-                   <Button fx:id="loginButton" onAction="#loginButtonAction" text="Iniciar sesión" />
-               </children>
-            </VBox>
-         </content>
-      </Tab>
+        <Tab text="Login" closable="false">
+            <content>
+                <VBox alignment="CENTER" spacing="10">
+                    <padding>
+                        <Insets bottom="50" left="50" right="50" top="50" />
+                    </padding>
+                    <children>
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inicio de sesión" />
+                        <TextField fx:id="emailField" promptText="Email" style="-fx-prompt-text-fill: #aaa;" />
+                        <TextField fx:id="nicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa;" />
+                        <Button fx:id="loginButton" onAction="#loginButtonAction" text="Iniciar sesión" />
+                        <TextArea fx:id="errorField" prefHeight="40" prefWidth="250" editable="false" wrapText="true" 
+                                  style="-fx-text-fill: red; -fx-background-color: transparent;" />                    
+                    </children>
+                </VBox> 
+            </content>
+        </Tab>
         <Tab text="Registro" closable="false">
             <VBox alignment="CENTER" spacing="10">
                 <padding>
@@ -43,9 +43,9 @@
 
                 <TextField fx:id="registroEmailField" promptText="Email" style="-fx-prompt-text-fill: #aaa;" />
                 <TextField fx:id="registroNicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa;" />
-
                 <Button fx:id="registerButton" onAction="#registerButtonAction" text="Registrarse" />
-
+                    <TextArea fx:id="registroErrorField" prefHeight="40" prefWidth="250" editable="false" wrapText="true" 
+                        style="-fx-text-fill: red; -fx-background-color: transparent;" />
             </VBox>
         </Tab>
     </TabPane>

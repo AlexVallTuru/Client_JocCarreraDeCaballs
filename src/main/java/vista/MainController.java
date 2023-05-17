@@ -8,24 +8,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.control.Button;
 
 public class MainController {
 
-    private Stage stage; // Referencia al Stage actual
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+    @FXML
+    private Button salirButton;
 
     @FXML
     private void jugarButtonAction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("juego.fxml"));
             Parent root = loader.load();
-            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
             //JuegoController juegoController = loader.getController();
             //juegoController.setStage(stage); // Establecer el Stage en el JuegoController
-            
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,8 +31,18 @@ public class MainController {
     }
 
     @FXML
-    private void salirButtonAction(ActionEvent event) {
-        // Lógica para cerrar la aplicación
+    private void salirButtonAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
+        // Obtener la ventana actual y cerrarla
+        Stage currentStage = (Stage) salirButton.getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML

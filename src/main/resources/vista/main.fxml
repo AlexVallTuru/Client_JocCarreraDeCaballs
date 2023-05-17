@@ -29,7 +29,7 @@
                             <Font size="24.0" />
                         </font>
                     </Button>
-                    <Button onAction="#salirButtonAction" prefHeight="50" prefWidth="150" text="Salir">
+                    <Button fx:id="salirButton" onAction="#salirButtonAction" prefHeight="50" prefWidth="150" text="Desconectar">
                         <font>
                             <Font size="24.0" />
                         </font>

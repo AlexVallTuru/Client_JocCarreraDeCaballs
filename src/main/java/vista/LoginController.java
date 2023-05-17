@@ -40,11 +40,19 @@ public class LoginController implements Initializable {
     @FXML
     private TextArea registroErrorField;
 
+    
+    /**
+     * Nos proporciona metodos que nos permiten interectuar con la base de datos
+     * relacionada con los usuarios.
+     */
     static ILoginResiter user;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            /**
+             * Obtenemos la instancia remota de LoginRegisterEJBRemoteLookup
+             */
             user = Lookups.LoginRegisterEJBRemoteLookup();
         } catch (NamingException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +63,7 @@ public class LoginController implements Initializable {
     private void loginButtonAction(ActionEvent event) throws IOException, UsuariException {
         try {
             if (user.validaUsuariExistent(emailField.getText(), nicknameField.getText())) {
-
+                registroErrorField.setText("Iniciando sesión, espere...");
                 user.getSessio(emailField.getText());
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
@@ -70,7 +78,7 @@ public class LoginController implements Initializable {
                 currentStage.close();
 
             } else {
-                errorField.setText("Mail o nick, no existent");
+                errorField.setText("El correo electrónico o el nick ingresados no existen en nuestros registros.");
             }
         } catch (UsuariException ex) {
             errorField.setText("Error: " + ex.getMessage());
@@ -80,6 +88,7 @@ public class LoginController implements Initializable {
     @FXML
     private void registerButtonAction(ActionEvent event) throws IOException {
         try {
+            registroErrorField.setText("Registrando el usuario, espere...");
             user.addUsuari(registroEmailField.getText(), registroNicknameField.getText());
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
@@ -92,8 +101,13 @@ public class LoginController implements Initializable {
 
             Stage currentStage = (Stage) registerButton.getScene().getWindow();
             currentStage.close();
+
         } catch (UsuariException ex) {
-            errorField.setText("Error: " + ex.getMessage());
+            String errorMessage = "Error al registrar el usuario. Por favor, revise el correo electrónico o el nick.";
+            errorMessage += "\nDetalles del error:\n";
+            errorMessage += "ERROR: " + ex.getMessage();
+
+            registroErrorField.setText(errorMessage);
         }
     }
 

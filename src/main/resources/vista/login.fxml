@@ -27,8 +27,8 @@
                         <TextField fx:id="emailField" promptText="Email" style="-fx-prompt-text-fill: #aaa;" />
                         <TextField fx:id="nicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa;" />
                         <Button fx:id="loginButton" onAction="#loginButtonAction" text="Iniciar sesión" />
-                        <TextArea fx:id="errorField" prefHeight="40" prefWidth="250" editable="false" wrapText="true" 
-                                  style="-fx-text-fill: red; -fx-background-color: transparent;" />                    
+                        <TextArea fx:id="errorField" prefHeight="80" prefWidth="250" editable="false" wrapText="true" 
+                                  style="-fx-text-fill: red; -fx-control-inner-background: transparent; -fx-background-color: transparent; -fx-background-insets: 0;" />                    
                     </children>
                 </VBox> 
             </content>
@@ -44,8 +44,8 @@
                 <TextField fx:id="registroEmailField" promptText="Email" style="-fx-prompt-text-fill: #aaa;" />
                 <TextField fx:id="registroNicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa;" />
                 <Button fx:id="registerButton" onAction="#registerButtonAction" text="Registrarse" />
-                    <TextArea fx:id="registroErrorField" prefHeight="40" prefWidth="250" editable="false" wrapText="true" 
-                        style="-fx-text-fill: red; -fx-background-color: transparent;" />
+                    <TextArea fx:id="registroErrorField" prefHeight="80" prefWidth="250" editable="false" wrapText="true" 
+                        style="-fx-text-fill: red; -fx-control-inner-background: transparent; -fx-background-color: transparent; -fx-background-insets: 0;" />
             </VBox>
         </Tab>
     </TabPane>

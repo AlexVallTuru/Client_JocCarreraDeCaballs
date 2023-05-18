@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PartidaJuegoController">
+    <center>
+        <HBox spacing="10.0">
+            <VBox alignment="CENTER" spacing="10.0">
+                <ImageView fx:id="cartaImageView" fitWidth="200.0" preserveRatio="true" />
+                <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" text="Pedir Carta" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0" />
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

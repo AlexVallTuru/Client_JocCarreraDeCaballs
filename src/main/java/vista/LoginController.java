@@ -40,7 +40,6 @@ public class LoginController implements Initializable {
     @FXML
     private TextArea registroErrorField;
 
-    
     /**
      * Nos proporciona metodos que nos permiten interectuar con la base de datos
      * relacionada con los usuarios.
@@ -71,6 +70,12 @@ public class LoginController implements Initializable {
 
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
+
+                // Obtener el controlador de la escena principal
+                MainController mainController = loader.getController();
+                // Pasar los valores a través del método set en el controlador de la escena principal
+                mainController.setEmailAndNickname(emailField.getText(), nicknameField.getText());
+
                 stage.setScene(scene);
                 stage.show();
 
@@ -96,6 +101,12 @@ public class LoginController implements Initializable {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+
+            // Obtener el controlador de la escena principal
+            MainController mainController = loader.getController();
+            // Pasar los valores a través del método set en el controlador de la escena principal
+            mainController.setEmailAndNickname(registroEmailField.getText(), registroNicknameField.getText());
+
             stage.setScene(scene);
             stage.show();
 

@@ -53,10 +53,6 @@ public class PartidaJuegoController implements Initializable {
         }
     }
 
-    public void initialize() {
-
-    }
-
     @FXML
     private void pedirCarta() throws PartidaException, IOException {
         // Lógica para obtener una nueva carta y actualizar la puntuación
@@ -65,10 +61,16 @@ public class PartidaJuegoController implements Initializable {
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual);
 
         if (puntuacionActual == 10) {
+            
+            System.out.print("\nIDPARTIDA: " +idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
+            
             partida.añadirPuntosPartida(idPartida, puntuacionActual);
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
             Parent root = loader.load();
 
+            //Se tiene pasar otra vez el mail y el usuario para que no se pierda en siguientes patidas.
+            
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
@@ -76,7 +78,7 @@ public class PartidaJuegoController implements Initializable {
             stage.show();
 
             // Obtener la ventana actual y cerrarla
-            Stage currentStage = (Stage) cartaImageView.getScene().getWindow();
+            Stage currentStage = (Stage) pedirCartaButton.getScene().getWindow();
             currentStage.close();
         }
     }

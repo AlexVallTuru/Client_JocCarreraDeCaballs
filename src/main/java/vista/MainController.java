@@ -73,7 +73,7 @@ public class MainController implements Initializable {
 
         stage.setScene(scene);
         stage.show();
-
+        
         // Obtener la ventana actual y cerrarla
         Stage currentStage = (Stage) salirButton.getScene().getWindow();
         currentStage.close();

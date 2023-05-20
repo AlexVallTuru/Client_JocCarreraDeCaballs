@@ -24,13 +24,14 @@ public class MainController implements Initializable {
     @FXML
     private Button salirButton;
 
-    private String email;
-    private String nickname;
-
+    private String email="";
+    private String nickname="";
+    private int idpartida = 0;
+    
     //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
     private int dificultad = 2;
 
-    private int idpartida;
+
 
     static IPartida partida;
 
@@ -70,6 +71,7 @@ public class MainController implements Initializable {
         PartidaJuegoController partidaJuegoController = loader.getController();
         // Pasar los valores a través del método setIdPartida en el controlador de la escena partidaJuego
         partidaJuegoController.setIdPartida(idpartida);
+        partidaJuegoController.setEmailAndNickname(email, nickname);
 
         stage.setScene(scene);
         stage.show();
@@ -89,11 +91,6 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-
-        // Obtener el controlador de la escena principal
-        PartidaJuegoController partidaJuegoController = loader.getController();
-        // Pasar los valores a través del método set en el controlador de la escena principal
-        partidaJuegoController.setEmailAndNickname(email, nickname);
 
         // Obtener la ventana actual y cerrarla
         Stage currentStage = (Stage) salirButton.getScene().getWindow();

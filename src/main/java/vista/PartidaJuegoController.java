@@ -36,6 +36,9 @@ public class PartidaJuegoController implements Initializable {
 
     private int puntuacionActual = 0;
 
+    private String email;
+    private String nickname;
+
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,21 +64,25 @@ public class PartidaJuegoController implements Initializable {
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual);
 
         if (puntuacionActual == 10) {
-            
-            System.out.print("\nIDPARTIDA: " +idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
-            
+
+            System.out.print("\nIDPARTIDA: " + idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
+
             partida.añadirPuntosPartida(idPartida, puntuacionActual);
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
             Parent root = loader.load();
 
             //Se tiene pasar otra vez el mail y el usuario para que no se pierda en siguientes patidas.
-            
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
             stage.setScene(scene);
             stage.show();
+
+            // Obtener el controlador de la escena principal
+            MainController mainController = loader.getController();
+            // Pasar los valores a través del método set en el controlador de la escena principal
+            mainController.setEmailAndNickname(email,nickname);
 
             // Obtener la ventana actual y cerrarla
             Stage currentStage = (Stage) pedirCartaButton.getScene().getWindow();
@@ -85,5 +92,10 @@ public class PartidaJuegoController implements Initializable {
 
     public void setIdPartida(int idPartida) {
         this.idPartida = idPartida;
+    }
+
+    public void setEmailAndNickname(String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
     }
 }

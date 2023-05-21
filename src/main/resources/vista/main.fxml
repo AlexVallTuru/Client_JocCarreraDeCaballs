@@ -4,67 +4,115 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="467.0" prefWidth="770.0" spacing="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.MainController">
-    <padding>
-        <Insets bottom="50" left="50" right="50" top="50" />
-    </padding>
-
-    <TabPane prefHeight="407.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-            <Tab text="Menu Principal">
-                <VBox alignment="CENTER" spacing="10">
-                    <Label prefHeight="126.0" prefWidth="409.0" text="CARRERA DE CARTES">
-                        <font>
-                            <Font size="35.0" />
-                        </font>
-                    </Label>
-                    <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="150" text="Jugar">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                    </Button>
-                    <Button fx:id="salirButton" onAction="#salirButtonAction" prefHeight="50" prefWidth="150" text="Desconectar">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                    </Button>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1093.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.MainController">
+    <tabs>
+        <Tab text="Menu Principal">
+            <content>
+                <VBox alignment="CENTER" prefHeight="544.0" prefWidth="943.0" spacing="10">
+                    <children>
+                        <Label prefHeight="126.0" prefWidth="409.0" text="CARRERA DE CARTES">
+                            <font>
+                                <Font size="35.0" />
+                            </font>
+                        </Label>
+                        <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="150" text="Jugar">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="salirButton" onAction="#salirButtonAction" prefHeight="50" prefWidth="150" text="Desconectar">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                    </children>
                 </VBox>
-            </Tab>
-            <Tab text="Hall Of Fame">
+            </content>
+        </Tab>
+        <Tab text="Hall Of Fame">
+            <content>
                 <VBox alignment="CENTER" spacing="10">
-                    <Label text="Hall Of Fame" />
-                    <VBox spacing="10">
-                        <Label text="Jugadores" />
-                        <ListView fx:id="jugadoresListView" />
-                    </VBox>
-                    <VBox spacing="10">
-                        <Label text="Puntos" />
-                        <ListView fx:id="puntosListView" />
-                    </VBox>
+                    <children>
+                        <Pane prefHeight="65.0" prefWidth="1022.0">
+                            <children>
+                                <Label layoutX="709.0" layoutY="25.0" prefHeight="25.0" prefWidth="216.0" text="DIFICULTAD DIFICIL" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="128.0" layoutY="25.0" prefHeight="25.0" prefWidth="214.0" text="DIFICULTAD NORMAL" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                        <HBox prefHeight="583.0" prefWidth="1022.0">
+                            <children>
+                                <Pane prefHeight="569.0" prefWidth="542.0">
+                                    <children>
+                                        <TableView fx:id="tvHall_n" layoutX="-2.0" prefHeight="570.0" prefWidth="509.0">
+                                            <columns>
+                                                <TableColumn fx:id="tc_nick_n" prefWidth="131.0" text="Nick" />
+                                                <TableColumn fx:id="tc_partida_n" prefWidth="95.0" text="Partida" />
+                                                <TableColumn fx:id="tc_puntos_n" prefWidth="142.0" text="Puntos" />
+                                                <TableColumn fx:id="tc_fecha_n" minWidth="6.0" prefWidth="140.0" text="Fecha" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin>
+                                </Pane>
+                                <Pane prefHeight="567.0" prefWidth="508.0">
+                                    <children>
+                                        <TableView fx:id="tvHall_d" layoutX="-2.0" layoutY="1.0" prefHeight="564.0" prefWidth="512.0">
+                                            <columns>
+                                                <TableColumn fx:id="tc_nick_d" prefWidth="131.0" text="Nick" />
+                                                <TableColumn fx:id="tc_partida_d" prefWidth="95.0" text="Partida" />
+                                                <TableColumn fx:id="tc_puntos_d" prefWidth="142.0" text="Puntos" />
+                                                <TableColumn fx:id="tc_fecha_d" minWidth="6.0" prefWidth="143.0" text="Fecha" />
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="20.0" />
+                                    </HBox.margin>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </children>
                 </VBox>
-            </Tab>
-            <Tab text="Seleccionar Dificultad">
+            </content>
+        </Tab>
+        <Tab text="Seleccionar Dificultad">
+            <content>
                 <VBox alignment="CENTER" spacing="10">
-                    <Label text="Seleccionar Dificultad" />
-                    <CheckBox onAction="#dificultadNormalCheckBoxAction" text="Normal">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                    </CheckBox>
-                    <CheckBox onAction="#dificultadDificilCheckBoxAction" text="Difícil">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                    </CheckBox>
-                    <Label fx:id="dificultadLabel" text="" />
+                    <children>
+                        <Label text="Seleccionar Dificultad" />
+                        <CheckBox onAction="#dificultadNormalCheckBoxAction" text="Normal">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </CheckBox>
+                        <CheckBox onAction="#dificultadDificilCheckBoxAction" text="Difícil">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </CheckBox>
+                        <Label fx:id="dificultadLabel" text="" />
+                    </children>
                 </VBox>
-            </Tab>
-        </tabs>
-    </TabPane>
-</VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

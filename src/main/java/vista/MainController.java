@@ -15,8 +15,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javax.naming.NamingException;
 
 public class MainController implements Initializable {
@@ -24,14 +27,16 @@ public class MainController implements Initializable {
     @FXML
     private Button salirButton;
 
-    private String email="";
-    private String nickname="";
+    private String email = "";
+    private String nickname = "";
     private int idpartida = 0;
-    
+    private String paloSeleccionado;
+
     //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
     private int dificultad = 2;
 
-
+    @FXML
+    private ComboBox paloSelect;
 
     static IPartida partida;
 
@@ -42,6 +47,9 @@ public class MainController implements Initializable {
              * Obtenemos la instancia remota de partidaEJBRemoteLookup
              */
             partida = Lookups.partidaEJBRemoteLookup();
+            
+            ObservableList<String> palos = FXCollections.observableArrayList("Oros", "Copas", "Espadas", "Bastos");
+            paloSelect.setItems(palos);
         } catch (NamingException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al obtener la instancia de partidaEJBRemoteLookup", ex);
         }
@@ -60,7 +68,10 @@ public class MainController implements Initializable {
         } catch (PartidaException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al crear una partida:", ex);
         }
-
+        paloSeleccionado = (String) paloSelect.getSelectionModel().getSelectedItem();
+        if (paloSeleccionado == null) {
+            paloSeleccionado = "Oros";
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("partidaJuego.fxml"));
         Parent root = loader.load();
 
@@ -72,6 +83,7 @@ public class MainController implements Initializable {
         // Pasar los valores a través del método setIdPartida en el controlador de la escena partidaJuego
         partidaJuegoController.setIdPartida(idpartida);
         partidaJuegoController.setEmailAndNickname(email, nickname);
+        partidaJuegoController.setPalo(paloSeleccionado);
 
         stage.setScene(scene);
         stage.show();

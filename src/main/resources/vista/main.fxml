@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
@@ -24,6 +25,7 @@
                             <Font size="35.0" />
                         </font>
                     </Label>
+               <ComboBox fx:id="paloSelect" prefWidth="150.0" promptText="Escoge palo" />
                     <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="150" text="Jugar">
                         <font>
                             <Font size="24.0" />

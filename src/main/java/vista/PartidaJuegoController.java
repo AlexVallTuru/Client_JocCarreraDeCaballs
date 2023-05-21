@@ -3,6 +3,7 @@ package vista;
 import common.Lookups;
 import common.PartidaException;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.naming.NamingException;
 import static vista.LoginController.user;
@@ -33,8 +35,13 @@ public class PartidaJuegoController implements Initializable {
 
     @FXML
     private Label puntuacionLabel;
+    
+    @FXML
+    private Label paloActual;
 
     private int puntuacionActual = 0;
+    private String puntuacionNueva = "";
+    private String palo;
 
     private String email;
     private String nickname;
@@ -45,6 +52,7 @@ public class PartidaJuegoController implements Initializable {
 
         Image cartaImage = new Image(getClass().getResourceAsStream("caballo.jpeg"));
         cartaImageView.setImage(cartaImage);
+        paloActual.setText(palo);
 
         try {
             /**
@@ -60,10 +68,13 @@ public class PartidaJuegoController implements Initializable {
     private void pedirCarta() throws PartidaException, IOException {
         // Lógica para obtener una nueva carta y actualizar la puntuación
         // Por ahora, simplemente incrementaremos la puntuación actual en 1
-        puntuacionActual++;
+        puntuacionNueva = partida.partidaLogica(puntuacionActual, palo);
+        if (!puntuacionNueva.equals("END")) {
+            puntuacionActual = parseInt(puntuacionNueva);
+        }
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual);
-
-        if (puntuacionActual == 10) {
+        
+        if (puntuacionActual >= 38 || puntuacionNueva.equals("END")) {
 
             System.out.print("\nIDPARTIDA: " + idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
 
@@ -88,6 +99,10 @@ public class PartidaJuegoController implements Initializable {
             Stage currentStage = (Stage) pedirCartaButton.getScene().getWindow();
             currentStage.close();
         }
+    }
+    
+    public void setPalo(String paloIn) {
+        this.palo = paloIn;
     }
 
     public void setIdPartida(int idPartida) {

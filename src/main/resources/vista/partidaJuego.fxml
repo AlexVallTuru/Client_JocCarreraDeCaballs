@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PartidaJuegoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PartidaJuegoController">
     <center>
         <HBox spacing="10.0">
             <VBox alignment="CENTER" spacing="10.0">
@@ -16,6 +16,7 @@
             </VBox>
             <VBox alignment="CENTER" spacing="10.0">
                 <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0" />
+            <Label fx:id="paloActual" text="Label" />
             </VBox>
         </HBox>
     </center>

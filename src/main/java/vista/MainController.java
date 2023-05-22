@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,10 +36,10 @@ public class MainController implements Initializable {
     private String nickname = "";
     private int idpartida = 0;
 
-//    @EJB
-//    PartidaEJB partidaEJB;
-    //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
-    private int dificultad = 1;
+    @FXML
+    private CheckBox Check_modoDificil;
+
+    private int dificultad = 0;
 
     static IPartida partida;
 
@@ -73,13 +74,13 @@ public class MainController implements Initializable {
     private TableView tvHall_d;
 
     private void RecargaHallOfFame(int Dificultad) {
-        
+
         try {
             List<PartidaJuego> hallOfFame = partida.ObtenerHallOfFame(Dificultad);
-            
+
             switch (Dificultad) {
                 case 0:
-                    
+
                     // Limpiar la tabla
                     tvHall_n.getItems().clear();
                     // Configurar las columnas
@@ -91,7 +92,7 @@ public class MainController implements Initializable {
                     tvHall_n.getItems().addAll(hallOfFame);
                     break;
                 case 1:
-                    
+
                     // Limpiar la tabla
                     tvHall_d.getItems().clear();
                     // Configurar las columnas
@@ -188,13 +189,13 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void dificultadNormalCheckBoxAction(ActionEvent event) {
-        // Lógica para establecer la dificultad normal
-    }
-
-    @FXML
-    private void dificultadDificilCheckBoxAction(ActionEvent event) {
-        // Lógica para establecer la dificultad difícil
+    void ModoDIficil(ActionEvent event) {
+        
+        if (Check_modoDificil.isSelected()) {
+            dificultad = 1;
+        } else {
+            dificultad = 0;
+        }
     }
 
     public void setEmailAndNickname(String email, String nickname) {

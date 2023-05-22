@@ -33,7 +33,7 @@ public class MainController implements Initializable {
     private String paloSeleccionado;
 
     //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
-    private int dificultad = 2;
+    private int dificultad = 1;
 
     @FXML
     private ComboBox paloSelect;
@@ -57,7 +57,6 @@ public class MainController implements Initializable {
 
     @FXML
     private void jugarButtonAction(ActionEvent event) throws IOException {
-
         try {
 
             idpartida = partida.createPartida(dificultad, email, nickname);
@@ -69,6 +68,7 @@ public class MainController implements Initializable {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al crear una partida:", ex);
         }
         paloSeleccionado = (String) paloSelect.getSelectionModel().getSelectedItem();
+        this.paloSeleccionado = paloSeleccionado;
         if (paloSeleccionado == null) {
             paloSeleccionado = "Oros";
         }
@@ -84,6 +84,7 @@ public class MainController implements Initializable {
         partidaJuegoController.setIdPartida(idpartida);
         partidaJuegoController.setEmailAndNickname(email, nickname);
         partidaJuegoController.setPalo(paloSeleccionado);
+        partidaJuegoController.setDificultad(dificultad);
 
         stage.setScene(scene);
         stage.show();

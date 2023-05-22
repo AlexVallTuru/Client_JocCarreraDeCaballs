@@ -13,10 +13,11 @@
             <VBox alignment="CENTER" spacing="10.0">
                 <ImageView fx:id="cartaImageView" fitWidth="200.0" preserveRatio="true" />
                 <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" text="Pedir Carta" />
+            <Label fx:id="cartaActual" text="Carta: " />
             </VBox>
             <VBox alignment="CENTER" spacing="10.0">
                 <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0" />
-            <Label fx:id="paloActual" text="Label" />
+            <Label fx:id="paloActual" text="Palo actual:" />
             </VBox>
         </HBox>
     </center>

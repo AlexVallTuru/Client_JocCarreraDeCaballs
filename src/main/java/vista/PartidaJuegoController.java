@@ -1,6 +1,7 @@
 package vista;
 
 import common.Lookups;
+import common.ObjetoPartida;
 import common.PartidaException;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
@@ -26,6 +27,9 @@ import static vista.MainController.partida;
 public class PartidaJuegoController implements Initializable {
 
     int idPartida;
+    
+    @FXML
+    private Label cartaActual;
 
     @FXML
     private ImageView cartaImageView;
@@ -40,8 +44,9 @@ public class PartidaJuegoController implements Initializable {
     private Label paloActual;
 
     private int puntuacionActual = 0;
-    private String puntuacionNueva = "";
+    private ObjetoPartida puntuacionNueva;
     private String palo;
+    private int dificultad;
 
     private String email;
     private String nickname;
@@ -52,7 +57,7 @@ public class PartidaJuegoController implements Initializable {
 
         Image cartaImage = new Image(getClass().getResourceAsStream("caballo.jpeg"));
         cartaImageView.setImage(cartaImage);
-        paloActual.setText(palo);
+        paloActual.setText("Palo actual: " + palo);
 
         try {
             /**
@@ -68,13 +73,17 @@ public class PartidaJuegoController implements Initializable {
     private void pedirCarta() throws PartidaException, IOException {
         // Lógica para obtener una nueva carta y actualizar la puntuación
         // Por ahora, simplemente incrementaremos la puntuación actual en 1
-        puntuacionNueva = partida.partidaLogica(puntuacionActual, palo);
-        if (!puntuacionNueva.equals("END")) {
-            puntuacionActual = parseInt(puntuacionNueva);
+        puntuacionNueva = partida.partidaLogica(puntuacionActual, palo, dificultad);
+        if (puntuacionNueva.isIsFinished()) {
+            puntuacionActual = 0;
+        } else if (puntuacionNueva != null){
+            puntuacionActual = puntuacionNueva.getScore();
+            cartaActual.setText(puntuacionNueva.getImageName());
         }
+        
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual);
         
-        if (puntuacionActual >= 38 || puntuacionNueva.equals("END")) {
+        if (puntuacionActual >= 38 || puntuacionNueva.isIsFinished()) {
 
             System.out.print("\nIDPARTIDA: " + idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
 
@@ -103,6 +112,11 @@ public class PartidaJuegoController implements Initializable {
     
     public void setPalo(String paloIn) {
         this.palo = paloIn;
+        paloActual.setText("Palo actual: " + palo);
+    }
+    
+    public void setDificultad(int dificultad) {
+        this.dificultad = dificultad;
     }
 
     public void setIdPartida(int idPartida) {

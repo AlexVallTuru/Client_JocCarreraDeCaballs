@@ -65,22 +65,7 @@ public class LoginController implements Initializable {
                 registroErrorField.setText("Iniciando sesión, espere...");
                 user.getSessio(emailField.getText());
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-
-                // Obtener el controlador de la escena principal
-                MainController mainController = loader.getController();
-                // Pasar los valores a través del método set en el controlador de la escena principal
-                mainController.setEmailAndNickname(emailField.getText(), nicknameField.getText());
-
-                stage.setScene(scene);
-                stage.show();
-
-                Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                currentStage.close();
+                cambiarEscena(emailField.getText(), nicknameField.getText());
 
             } else {
                 errorField.setText("El correo electrónico o el nick ingresados no existen en nuestros registros.");
@@ -96,22 +81,7 @@ public class LoginController implements Initializable {
             registroErrorField.setText("Registrando el usuario, espere...");
             user.addUsuari(registroEmailField.getText(), registroNicknameField.getText());
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            // Obtener el controlador de la escena principal
-            MainController mainController = loader.getController();
-            // Pasar los valores a través del método set en el controlador de la escena principal
-            mainController.setEmailAndNickname(registroEmailField.getText(), registroNicknameField.getText());
-
-            stage.setScene(scene);
-            stage.show();
-
-            Stage currentStage = (Stage) registerButton.getScene().getWindow();
-            currentStage.close();
+            cambiarEscena(registroEmailField.getText(), registroNicknameField.getText());
 
         } catch (UsuariException ex) {
             String errorMessage = "Error al registrar el usuario. Por favor, revise el correo electrónico o el nick.";
@@ -120,6 +90,25 @@ public class LoginController implements Initializable {
 
             registroErrorField.setText(errorMessage);
         }
+    }
+
+    private void cambiarEscena(String mail, String nick) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        // Obtener el controlador de la escena principal
+        MainController mainController = loader.getController();
+        // Pasar los valores a través del método set en el controlador de la escena principal
+        mainController.setEmailAndNickname(mail, nick);
+
+        stage.setScene(scene);
+        stage.show();
+
+        Stage currentStage = (Stage) loginButton.getScene().getWindow();
+        currentStage.close();
     }
 
 }

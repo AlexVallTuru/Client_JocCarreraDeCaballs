@@ -18,7 +18,7 @@
     <tabs>
         <Tab text="Menu Principal">
             <content>
-                <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f9cb9c; -fx-border-color: white; -fx-border-width: 20px;">
+                <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f9cb9c; -fx-border-color: white; -fx-border-width: 0;">
                     <children>
                         <Label prefHeight="126.0" prefWidth="409.0" text="CARRERA DE CARTES">
                             <font>
@@ -48,7 +48,7 @@
          <content>
             <BorderPane>
                <center>
-                        <HBox alignment="TOP_CENTER" prefHeight="692.0" prefWidth="1240.0" style="-fx-background-color: #f9cb9c; -fx-border-width: 20; -fx-border-color: white;" BorderPane.alignment="CENTER">
+                        <HBox alignment="TOP_CENTER" prefHeight="692.0" prefWidth="1240.0" style="-fx-background-color: #f9cb9c;" BorderPane.alignment="CENTER">
                             <children>
                                 <Pane>
                                     <children>
@@ -67,10 +67,10 @@
                                             </Label>
                                               <TableView fx:id="tvHall_n" style="-fx-background-color: TRansparent;">
                                                   <columns>
-                                                      <TableColumn fx:id="tc_nick_n" prefWidth="131.0" style="-fx-background-color: white;" text="Nick" />
-                                                      <TableColumn fx:id="tc_partida_n" prefWidth="95.0" style="-fx-background-color: white;" text="Partida" />
-                                                      <TableColumn fx:id="tc_puntos_n" prefWidth="68.0" style="-fx-background-color: white;" text="Puntos" />
-                                                      <TableColumn fx:id="tc_fecha_n" minWidth="6.0" prefWidth="190.0" style="-fx-background-color: white;" text="Fecha" />
+                                                      <TableColumn fx:id="tc_nick_n" prefWidth="131.0" text="Nick" />
+                                                      <TableColumn fx:id="tc_partida_n" prefWidth="95.0" text="Partida" />
+                                                      <TableColumn fx:id="tc_puntos_n" prefWidth="68.0" text="Puntos" />
+                                                      <TableColumn fx:id="tc_fecha_n" minWidth="6.0" prefWidth="190.0" text="Fecha" />
                                                   </columns>
                                               </TableView>
                                  </children>
@@ -100,10 +100,10 @@
                                             </Label>
                                               <TableView fx:id="tvHall_d" style="-fx-background-color: whiTRansparentte;">
                                                   <columns>
-                                                      <TableColumn fx:id="tc_nick_d" prefWidth="131.0" style="-fx-background-color: white;" text="Nick" />
-                                                      <TableColumn fx:id="tc_partida_d" prefWidth="95.0" style="-fx-background-color: white;" text="Partida" />
-                                                      <TableColumn fx:id="tc_puntos_d" prefWidth="95.0" style="-fx-background-color: white;" text="Puntos" />
-                                                      <TableColumn fx:id="tc_fecha_d" minWidth="6.0" prefWidth="190.0" style="-fx-background-color: white;" text="Fecha" />
+                                                      <TableColumn fx:id="tc_nick_d" prefWidth="131.0" text="Nick" />
+                                                      <TableColumn fx:id="tc_partida_d" prefWidth="95.0" text="Partida" />
+                                                      <TableColumn fx:id="tc_puntos_d" prefWidth="95.0" text="Puntos" />
+                                                      <TableColumn fx:id="tc_fecha_d" minWidth="6.0" prefWidth="190.0" text="Fecha" />
                                                   </columns>
                                               </TableView>
                                  </children>

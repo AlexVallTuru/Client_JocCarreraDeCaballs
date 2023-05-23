@@ -76,33 +76,37 @@ public class MainController implements Initializable {
     private void RecargaHallOfFame(int Dificultad) {
 
         try {
+
             List<PartidaJuego> hallOfFame = partida.ObtenerHallOfFame(Dificultad);
 
-            switch (Dificultad) {
-                case 0:
+            if (hallOfFame != null) {
 
-                    // Limpiar la tabla
-                    tvHall_n.getItems().clear();
-                    // Configurar las columnas
-                    tc_fecha_n.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
-                    tc_nick_n.setCellValueFactory(new PropertyValueFactory<>("nick"));
-                    tc_partida_n.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
-                    tc_puntos_n.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+                switch (Dificultad) {
+                    case 0:
 
-                    tvHall_n.getItems().addAll(hallOfFame);
-                    break;
-                case 1:
+                        // Limpiar la tabla
+                        tvHall_n.getItems().clear();
+                        // Configurar las columnas
+                        tc_fecha_n.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+                        tc_nick_n.setCellValueFactory(new PropertyValueFactory<>("nick"));
+                        tc_partida_n.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
+                        tc_puntos_n.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
 
-                    // Limpiar la tabla
-                    tvHall_d.getItems().clear();
-                    // Configurar las columnas
-                    tc_fecha_d.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
-                    tc_nick_d.setCellValueFactory(new PropertyValueFactory<>("nick"));
-                    tc_partida_d.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
-                    tc_puntos_d.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+                        tvHall_n.getItems().addAll(hallOfFame);
+                        break;
+                    case 1:
 
-                    tvHall_d.getItems().addAll(hallOfFame);
-                    break;
+                        // Limpiar la tabla
+                        tvHall_d.getItems().clear();
+                        // Configurar las columnas
+                        tc_fecha_d.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+                        tc_nick_d.setCellValueFactory(new PropertyValueFactory<>("nick"));
+                        tc_partida_d.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
+                        tc_puntos_d.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+
+                        tvHall_d.getItems().addAll(hallOfFame);
+                        break;
+                }
             }
 
         } catch (PartidaException e) {
@@ -190,7 +194,7 @@ public class MainController implements Initializable {
 
     @FXML
     void ModoDIficil(ActionEvent event) {
-        
+
         if (Check_modoDificil.isSelected()) {
             dificultad = 1;
         } else {

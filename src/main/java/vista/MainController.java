@@ -3,6 +3,7 @@ package vista;
 import common.IPartida;
 import common.Lookups;
 import common.PartidaException;
+import common.PartidaJuego;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +13,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javax.naming.NamingException;
 
 public class MainController implements Initializable {
@@ -32,13 +40,97 @@ public class MainController implements Initializable {
     private int idpartida = 0;
     private String paloSeleccionado;
 
-    //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
-    private int dificultad = 0;
-
     @FXML
     private ComboBox paloSelect;
 
+    @FXML
+    private CheckBox Check_modoDificil;
+
+    private int dificultad = 0;
+
     static IPartida partida;
+
+    @FXML
+    private TableColumn tc_fecha_n;
+
+    @FXML
+    private TableColumn tc_nick_n;
+
+    @FXML
+    private TableColumn tc_partida_n;
+
+    @FXML
+    private TableColumn tc_puntos_n;
+
+    @FXML
+    private TableView tvHall_n;
+
+    @FXML
+    private TableColumn tc_fecha_d;
+
+    @FXML
+    private TableColumn tc_nick_d;
+
+    @FXML
+    private TableColumn tc_partida_d;
+
+    @FXML
+    private TableColumn tc_puntos_d;
+
+    @FXML
+    private TableView tvHall_d;
+
+    private void RecargaHallOfFame(int Dificultad) {
+
+        try {
+
+            List<PartidaJuego> hallOfFame = partida.ObtenerHallOfFame(Dificultad);
+
+            if (hallOfFame != null) {
+
+                switch (Dificultad) {
+                    case 0:
+
+                        // Limpiar la tabla
+                        tvHall_n.getItems().clear();
+                        // Configurar las columnas
+                        tc_fecha_n.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+                        tc_nick_n.setCellValueFactory(new PropertyValueFactory<>("nick"));
+                        tc_partida_n.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
+                        tc_puntos_n.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+
+                        tvHall_n.getItems().addAll(hallOfFame);
+                        break;
+                    case 1:
+
+                        // Limpiar la tabla
+                        tvHall_d.getItems().clear();
+                        // Configurar las columnas
+                        tc_fecha_d.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
+                        tc_nick_d.setCellValueFactory(new PropertyValueFactory<>("nick"));
+                        tc_partida_d.setCellValueFactory(new PropertyValueFactory<>("idPartida"));
+                        tc_puntos_d.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+
+                        tvHall_d.getItems().addAll(hallOfFame);
+                        break;
+                }
+            }
+
+        } catch (PartidaException e) {
+            generarAdvertencia("no se ha podido cargar la tabla de hall of fame");
+        }
+    }
+
+    private void generarAdvertencia(String motivo) {
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+
+        alert.setTitle("ALERTA");
+        alert.setHeaderText(null); // Sin encabezado
+        alert.setContentText(motivo);
+
+        alert.showAndWait();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,6 +142,8 @@ public class MainController implements Initializable {
             
             ObservableList<String> palos = FXCollections.observableArrayList("Oros", "Copas", "Espadas", "Bastos");
             paloSelect.setItems(palos);
+            RecargaHallOfFame(0);
+            RecargaHallOfFame(1);
         } catch (NamingException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al obtener la instancia de partidaEJBRemoteLookup", ex);
         }
@@ -114,13 +208,13 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void dificultadNormalCheckBoxAction(ActionEvent event) {
-        // Lógica para establecer la dificultad normal
-    }
+    void ModoDIficil(ActionEvent event) {
 
-    @FXML
-    private void dificultadDificilCheckBoxAction(ActionEvent event) {
-        // Lógica para establecer la dificultad difícil
+        if (Check_modoDificil.isSelected()) {
+            dificultad = 1;
+        } else {
+            dificultad = 0;
+        }
     }
 
     public void setEmailAndNickname(String email, String nickname) {

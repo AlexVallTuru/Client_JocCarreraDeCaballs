@@ -29,7 +29,7 @@ public class PartidaJuegoController implements Initializable {
     int idPartida;
     
     @FXML
-    private Label cartaActual;
+    private ImageView imagePalo;
 
     @FXML
     private ImageView cartaImageView;
@@ -39,9 +39,6 @@ public class PartidaJuegoController implements Initializable {
 
     @FXML
     private Label puntuacionLabel;
-    
-    @FXML
-    private Label paloActual;
 
     private int puntuacionActual = 0;
     private ObjetoPartida puntuacionNueva;
@@ -54,16 +51,12 @@ public class PartidaJuegoController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        Image cartaImage = new Image(getClass().getResourceAsStream("caballo.jpeg"));
-        cartaImageView.setImage(cartaImage);
-        paloActual.setText("Palo actual: " + palo);
-
         try {
             /**
              * Obtenemos la instancia remota de partidaEJBRemoteLookup
              */
             partida = Lookups.partidaEJBRemoteLookup();
+            partida.limpiaDescartes();
         } catch (NamingException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al obtener la instancia de partidaEJBRemoteLookup", ex);
         }
@@ -78,7 +71,8 @@ public class PartidaJuegoController implements Initializable {
             puntuacionActual = 0;
         } else if (puntuacionNueva != null){
             puntuacionActual = puntuacionNueva.getScore();
-            cartaActual.setText(puntuacionNueva.getImageName());
+            Image cartaImage = new Image(getClass().getResourceAsStream("cartas/" + puntuacionNueva.getImageName()));
+            cartaImageView.setImage(cartaImage);
         }
         
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual);
@@ -112,7 +106,8 @@ public class PartidaJuegoController implements Initializable {
     
     public void setPalo(String paloIn) {
         this.palo = paloIn;
-        paloActual.setText("Palo actual: " + palo);
+        Image cartaImage = new Image(getClass().getResourceAsStream("cartas/" + palo + ".png"));
+        imagePalo.setImage(cartaImage);
     }
     
     public void setDificultad(int dificultad) {

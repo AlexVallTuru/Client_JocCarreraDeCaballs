@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PartidaJuegoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1140.0" style="-fx-background-color: #d9d3ea;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.PartidaJuegoController">
     <center>
-        <HBox spacing="10.0">
-            <VBox alignment="CENTER" spacing="10.0">
-                <ImageView fx:id="cartaImageView" fitWidth="200.0" preserveRatio="true" />
-                <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" text="Pedir Carta" />
-            <Label fx:id="cartaActual" text="Carta: " />
+        <HBox alignment="CENTER" spacing="10.0">
+            <VBox alignment="CENTER" prefHeight="623.0" prefWidth="342.0" spacing="10.0" style="-fx-background-color: #f9cb9c; -fx-border-color: black; -fx-border-width: 3px;">
+                <ImageView fx:id="cartaImageView" fitWidth="200.0" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 3px;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></ImageView>
+                <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Pedir Carta">
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+            <HBox.margin>
+               <Insets bottom="50.0" left="50.0" top="50.0" />
+            </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" spacing="10.0">
-                <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0" />
-            <Label fx:id="paloActual" text="Palo actual:" />
+            <VBox alignment="CENTER" prefHeight="723.0" prefWidth="584.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px;">
+               <children>
+                      <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="paloActual" text="Palo:">
+                     <font>
+                        <Font size="39.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="imagePalo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 3px;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Solo suman las cartas del mismo palo.">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
             </VBox>
         </HBox>
     </center>

@@ -33,7 +33,7 @@ public class MainController implements Initializable {
     private String paloSeleccionado;
 
     //Variable que se tiene que obtener de la pestaña dificutad HARDCODEADO (a la espera de AITOR)
-    private int dificultad = 1;
+    private int dificultad = 0;
 
     @FXML
     private ComboBox paloSelect;

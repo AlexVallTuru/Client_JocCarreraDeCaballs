@@ -40,7 +40,10 @@
                     <Insets bottom="50" left="50" right="50" top="50" />
                 </padding>
 
-                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registro" />
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registro">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></Label>
 
                 <TextField fx:id="registroEmailField" prefHeight="34.0" prefWidth="281.0" promptText="Email" style="-fx-prompt-text-fill: #aaa; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" />
                 <TextField fx:id="registroNicknameField" prefHeight="33.0" prefWidth="279.0" promptText="Nickname" style="-fx-prompt-text-fill: #aaa; -fx-background-image: white; -fx-border-color: black; -fx-border-width: 3;" />

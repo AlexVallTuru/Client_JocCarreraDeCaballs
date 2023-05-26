@@ -5,7 +5,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -27,7 +26,7 @@
                                 <Font size="35.0" />
                             </font>
                         </Label>
-                        <ComboBox fx:id="paloSelect" prefWidth="150.0" promptText="Escoge palo" />
+                        <ComboBox fx:id="paloSelect" prefHeight="50.0" prefWidth="307.0" promptText="Escoge palo" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" />
                         <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="307.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Jugar">
                             <font>
                                 <Font size="24.0" />

@@ -276,7 +276,7 @@ public class PartidaJuegoController implements Initializable {
                         timerLabel.setText("Tiempo finalizado!");
                     });
 
-//                    timer.cancel();
+                    timer.cancel();
 
                     Platform.runLater(() -> {
                         mostrarResultadoPartida("Te dormiste!", "Se ha terminado el tiempo de partida");

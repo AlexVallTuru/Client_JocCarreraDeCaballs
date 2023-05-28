@@ -37,7 +37,7 @@ public class PartidaJuegoController implements Initializable {
     private Label timerLabel;
 
     private Timer timer;
-    private int segundos = 1 * 60;
+    private int segundos = 2 * 60;
 
     @FXML
     private Button btn_UsarCarta;

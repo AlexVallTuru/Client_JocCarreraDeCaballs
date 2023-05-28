@@ -79,7 +79,11 @@ public class MainController implements Initializable {
 
     @FXML
     private TableView tvHall_d;
-
+    
+    /**
+     * Metodo que recarga las tablas de Hall of fame con los nuevos datos
+     * @param Dificultad 
+     */
     private void RecargaHallOfFame(int Dificultad) {
 
         try {
@@ -120,7 +124,11 @@ public class MainController implements Initializable {
             generarAdvertencia("no se ha podido cargar la tabla de hall of fame");
         }
     }
-
+    
+    /**
+     * Genera una advertencia para el usuario
+     * @param motivo 
+     */
     private void generarAdvertencia(String motivo) {
 
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -131,7 +139,12 @@ public class MainController implements Initializable {
 
         alert.showAndWait();
     }
-
+    
+    /**
+     * Iniciamos el CB y rwecargamos las tablas de hall of fame
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -140,7 +153,7 @@ public class MainController implements Initializable {
              */
             partida = Lookups.partidaEJBRemoteLookup();
             
-            ObservableList<String> palos = FXCollections.observableArrayList("Oros", "Copas", "Espadas", "Bastos");
+            ObservableList<String> palos = FXCollections.observableArrayList( "Copas", "Espadas", "Bastos");
             paloSelect.setItems(palos);
             RecargaHallOfFame(0);
             RecargaHallOfFame(1);

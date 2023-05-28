@@ -7,8 +7,12 @@ import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +34,21 @@ public class PartidaJuegoController implements Initializable {
     int idPartida;
 
     @FXML
+    private Label timerLabel;
+
+    private Timer timer;
+    private int segundos = 1 * 60;
+
+    @FXML
+    private Button btn_UsarCarta;
+
+    @FXML
+    private Button btn_saltarCarta;
+
+    @FXML
+    private Label lbl_notificacion;
+
+    @FXML
     private ImageView imagePalo;
 
     @FXML
@@ -46,42 +65,114 @@ public class PartidaJuegoController implements Initializable {
     private String palo;
     private int dificultad;
     private int cartaCount = 0;
+    private int skips = 15;
 
     private String email;
     private String nickname;
 
+    /**
+     * Recogemos la partida
+     *
+     * @param url
+     * @param rb
+     */
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+
+            RunTimer();
             /**
              * Obtenemos la instancia remota de partidaEJBRemoteLookup
              */
+            btn_UsarCarta.setDisable(true);
+            btn_saltarCarta.setDisable(true);
+
             partida = Lookups.partidaEJBRemoteLookup();
             partida.limpiaDescartes();
+
         } catch (NamingException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, "Error al obtener la instancia de partidaEJBRemoteLookup", ex);
         }
     }
 
+    /**
+     * Llamamos al servidor, le pedimos la carta y la mostramops por pantalla
+     *
+     * @throws PartidaException
+     * @throws IOException
+     */
     @FXML
     private void pedirCarta() throws PartidaException, IOException {
         cartaCount++;
         // Llamada a la lógica del juego para obtener una nueva carta
         puntuacionNueva = partida.partidaLogica(puntuacionActual, palo, dificultad);
+
         if (puntuacionNueva.isIsFinished()) {
             // Si nos hemos quedado sin cartas, termina la partida y no se guarda una puntuación
             puntuacionActual = 0;
             mostrarResultadoPartida("Perdiste la partida.", "Te has "
                     + "quedado sin cartas.");
-        } else if (puntuacionNueva != null) {
-            // Si obtenemos una nueva carta, sumamos la puntuación y la mostramos
-            puntuacionActual = puntuacionNueva.getScore();
+            GoToMain();
+        } else {
             Image cartaImage = new Image(getClass().getResourceAsStream("cartas/" + puntuacionNueva.getImageName()));
             cartaImageView.setImage(cartaImage);
         }
 
+        lbl_notificacion.setText("");
+        pedirCartaButton.setDisable(true);
+        btn_UsarCarta.setDisable(false);
+
+        if (skips != 0) {
+            btn_saltarCarta.setDisable(false);
+        }
+    }
+
+    /**
+     * Metodo para omitir carta mostrada, buscamos una carta nueva
+     *
+     * @param event
+     * @throws PartidaException
+     * @throws IOException
+     */
+    @FXML
+    void SaltarCarta(ActionEvent event) throws PartidaException, IOException {
+
+        skips--;
+
+        pedirCarta();
+
+        lbl_notificacion.setText("Nueva carta pedida!, saltos restantes:" + skips);
+
+        btn_UsarCarta.setDisable(false);
+
+        if (skips != 0) {
+            btn_saltarCarta.setDisable(false);
+        } else {
+            btn_saltarCarta.setDisable(true);
+        }
+
+        pedirCartaButton.setDisable(true);
+    }
+
+    /**
+     * Usaremos la carta mostrada por pantalla sumando o restando la puntuacion,
+     * mostramos el resultado de la accion realizada.
+     *
+     * @param event
+     * @throws PartidaException
+     * @throws IOException
+     */
+    @FXML
+    void UsarCarta(ActionEvent event) throws PartidaException, IOException {
+
+        if (puntuacionNueva != null) {
+            // Si usamos la carta, sumamos la puntuación y la mostramos
+            puntuacionActual = puntuacionNueva.getScore();
+        }
+
         puntuacionLabel.setText("Puntuación actual: " + puntuacionActual + "/38");
+        lbl_notificacion.setText(puntuacionNueva.getMovimiento());
 
         if (puntuacionActual >= 38 || puntuacionNueva.isIsFinished()) {
             if (puntuacionActual == 38) {
@@ -97,27 +188,42 @@ public class PartidaJuegoController implements Initializable {
 
             System.out.print("\nIDPARTIDA: " + idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
 
-            partida.añadirPuntosPartida(idPartida, puntuacionActual);
+            partida.añadirPuntosPartida(idPartida, cartaCount);
+            GoToMain();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-            Parent root = loader.load();
-
-            //Se tiene pasar otra vez el mail y el usuario para que no se pierda en siguientes patidas.
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            stage.setScene(scene);
-            stage.show();
-
-            // Obtener el controlador de la escena principal
-            MainController mainController = loader.getController();
-            // Pasar los valores a través del método set en el controlador de la escena principal
-            mainController.setEmailAndNickname(email, nickname);
-
-            // Obtener la ventana actual y cerrarla
-            Stage currentStage = (Stage) pedirCartaButton.getScene().getWindow();
-            currentStage.close();
         }
+
+        btn_UsarCarta.setDisable(true);
+        pedirCartaButton.setDisable(false);
+        if (skips != 0) {
+            btn_saltarCarta.setDisable(true);
+        }
+
+    }
+
+    private void GoToMain() throws PartidaException, IOException {
+        
+        timer.cancel();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        Parent root = loader.load();
+
+        //Se tiene pasar otra vez el mail y el usuario para que no se pierda en siguientes patidas.
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.show();
+
+        // Obtener el controlador de la escena principal
+        MainController mainController = loader.getController();
+        // Pasar los valores a través del método set en el controlador de la escena principal
+        mainController.setEmailAndNickname(email, nickname);
+
+        // Obtener la ventana actual y cerrarla
+        Stage currentStage = (Stage) pedirCartaButton.getScene().getWindow();
+        currentStage.close();
+
     }
 
     private void mostrarResultadoPartida(String header, String mensaje) {
@@ -146,4 +252,43 @@ public class PartidaJuegoController implements Initializable {
         this.email = email;
         this.nickname = nickname;
     }
+
+    public void RunTimer() {
+        timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int tiempoRestante = segundos;
+
+            @Override
+            public void run() {
+                if (tiempoRestante > 0) {
+                    int minutos = tiempoRestante / 60;
+                    int segundos = tiempoRestante % 60;
+                    String tiempoRestanteString = String.format("%02d:%02d", minutos, segundos);
+
+                    Platform.runLater(() -> {
+                        timerLabel.setText("Tiempo restante: " + tiempoRestanteString);
+                    });
+
+                    tiempoRestante--;
+                } else {
+                    Platform.runLater(() -> {
+                        timerLabel.setText("Tiempo finalizado!");
+                    });
+
+//                    timer.cancel();
+
+                    Platform.runLater(() -> {
+                        mostrarResultadoPartida("Te dormiste!", "Se ha terminado el tiempo de partida");
+                        try {
+                            GoToMain();
+                        } catch (PartidaException | IOException ex) {
+                            Logger.getLogger(PartidaJuegoController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                }
+            }
+        }, 0, 1000); // Ejecutar cada segundo
+    }
+
 }

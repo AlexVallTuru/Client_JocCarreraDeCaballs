@@ -17,7 +17,7 @@
     <TabPane prefHeight="547.0" prefWidth="377.0">
         <Tab closable="false" text="Login">
             <content>
-                <VBox alignment="CENTER" spacing="10">
+                <VBox alignment="CENTER" scaleShape="false" spacing="10">
                     <padding>
                         <Insets bottom="50" left="50" right="50" top="50" />
                     </padding>
@@ -26,8 +26,8 @@
                      <padding>
                         <Insets bottom="10.0" />
                      </padding></Label>
-                        <TextField fx:id="emailField" prefHeight="183.0" prefWidth="377.0" promptText="Email" style="-fx-prompt-text-fill: #aaa; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" />
-                        <TextField fx:id="nicknameField" prefHeight="181.0" prefWidth="258.0" promptText="Nickname" style="-fx-prompt-text-fill: #aaa; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" />
+                        <TextField fx:id="emailField" promptText="Email" style="-fx-prompt-text-fill: #aaa; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" />
+                        <TextField fx:id="nicknameField" promptText="Nickname" style="-fx-prompt-text-fill: #aaa; -fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" />
                         <Button fx:id="loginButton" onAction="#loginButtonAction" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;" text="Iniciar sesión" />
                         <TextArea fx:id="errorField" editable="false" prefHeight="218.0" prefWidth="296.0" style="-fx-text-fill: red; -fx-control-inner-background: #f9cb9c; -fx-background-color: transparent; -fx-background-insets: 0;" wrapText="true" />                    
                     </children>

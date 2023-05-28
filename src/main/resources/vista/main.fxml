@@ -26,7 +26,12 @@
                                 <Font size="35.0" />
                             </font>
                         </Label>
-                        <ComboBox fx:id="paloSelect" prefHeight="50.0" prefWidth="307.0" promptText="Escoge palo" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" />
+                  <Label prefHeight="69.0" prefWidth="165.0" text="Escoje palo" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                        <ComboBox fx:id="paloSelect" prefHeight="50.0" prefWidth="307.0" promptText="Oros" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" />
                         <Button onAction="#jugarButtonAction" prefHeight="50" prefWidth="307.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Jugar">
                             <font>
                                 <Font size="24.0" />
@@ -69,10 +74,10 @@
                                                 </Label>
                                                 <TableView fx:id="tvHall_n" style="-fx-background-color: Transparent;">
                                                     <columns>
-                                                        <TableColumn fx:id="tc_nick_n" prefWidth="131.0" text="Nick" />
-                                                        <TableColumn fx:id="tc_partida_n" prefWidth="95.0" text="Partida" />
-                                                        <TableColumn fx:id="tc_puntos_n" prefWidth="68.0" text="Puntos" />
-                                                        <TableColumn fx:id="tc_fecha_n" minWidth="6.0" prefWidth="190.0" text="Fecha" />
+                                                        <TableColumn fx:id="tc_nick_n" prefWidth="117.0" text="Nick" />
+                                                        <TableColumn fx:id="tc_partida_n" prefWidth="68.0" text="Partida" />
+                                                        <TableColumn fx:id="tc_puntos_n" prefWidth="121.0" text="Cartas Usadas" />
+                                                        <TableColumn fx:id="tc_fecha_n" minWidth="6.0" prefWidth="205.0" text="Fecha" />
                                                     </columns>
                                                 </TableView>
                                             </children>
@@ -102,10 +107,10 @@
                                                 </Label>
                                                 <TableView fx:id="tvHall_d" style="-fx-background-color: whiTRansparentte;">
                                                     <columns>
-                                                        <TableColumn fx:id="tc_nick_d" prefWidth="131.0" text="Nick" />
-                                                        <TableColumn fx:id="tc_partida_d" prefWidth="95.0" text="Partida" />
-                                                        <TableColumn fx:id="tc_puntos_d" prefWidth="95.0" text="Puntos" />
-                                                        <TableColumn fx:id="tc_fecha_d" minWidth="6.0" prefWidth="190.0" text="Fecha" />
+                                                        <TableColumn fx:id="tc_nick_d" prefWidth="117.0" text="Nick" />
+                                                        <TableColumn fx:id="tc_partida_d" prefWidth="68.0" text="Partida" />
+                                                        <TableColumn fx:id="tc_puntos_d" prefWidth="121.0" text="Cartas Usadas" />
+                                                        <TableColumn fx:id="tc_fecha_d" minWidth="6.0" prefWidth="205.0" text="Fecha" />
                                                     </columns>
                                                 </TableView>
                                             </children>

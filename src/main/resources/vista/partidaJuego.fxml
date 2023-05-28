@@ -18,15 +18,35 @@
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></ImageView>
-                <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Pedir Carta">
+                <Button fx:id="pedirCartaButton" mnemonicParsing="false" onAction="#pedirCarta" prefHeight="52.0" prefWidth="175.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Pedir Carta">
                <font>
                   <Font size="24.0" />
                </font></Button>
+            <Button fx:id="btn_UsarCarta" mnemonicParsing="false" onAction="#UsarCarta" prefHeight="52.0" prefWidth="176.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Usar Carta">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_saltarCarta" mnemonicParsing="false" onAction="#SaltarCarta" style="-fx-border-color: black; -fx-border-width: 3px; -fx-background-color: white;" text="Saltar carta">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Label fx:id="timerLabel" alignment="CENTER" prefHeight="25.0" prefWidth="570.0" textFill="#1e79ae">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             <HBox.margin>
                <Insets bottom="50.0" left="50.0" top="50.0" />
             </HBox.margin>
             </VBox>
             <VBox alignment="CENTER" prefHeight="723.0" prefWidth="584.0" spacing="10.0">
+            <Label fx:id="lbl_notificacion" alignment="CENTER" prefHeight="25.0" prefWidth="570.0" textFill="#2fa400">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px;">
                <children>
                       <Label fx:id="puntuacionLabel" alignment="CENTER" text="Puntuación actual: 0">

@@ -97,7 +97,7 @@ public class PartidaJuegoController implements Initializable {
     }
 
     /**
-     * Llamamos al servidor, le pedimos la carta y la mostramops por pantalla
+     * Llamamos al servidor, le pedimos la carta y la mostramos por pantalla
      *
      * @throws PartidaException
      * @throws IOException
@@ -202,7 +202,7 @@ public class PartidaJuegoController implements Initializable {
     }
 
     private void GoToMain() throws PartidaException, IOException {
-        
+
         timer.cancel();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
@@ -234,12 +234,22 @@ public class PartidaJuegoController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Obtenemos el palo seleccionado por el usuario.
+     * 
+     * @param paloIn 
+     */
     public void setPalo(String paloIn) {
         this.palo = paloIn;
         Image cartaImage = new Image(getClass().getResourceAsStream("cartas/" + palo + ".png"));
         imagePalo.setImage(cartaImage);
     }
 
+    /**
+     * Obtenemos la dificultad seleccionada por el usuario.
+     * 
+     * @param dificultad 
+     */
     public void setDificultad(int dificultad) {
         this.dificultad = dificultad;
     }
@@ -253,6 +263,23 @@ public class PartidaJuegoController implements Initializable {
         this.nickname = nickname;
     }
 
+    /**
+     * Primero de todo instanciamos un objeto de timer y usamos el
+     * timer.scheduleAtFixedRate para programar un ratio, en este caso
+     * ejecutaremos la tarea de TimerTask cada segundo. La tarea TimerTask
+     * ejecuta el método Run, que lo que hace és que hasta que el tiempo
+     * resatnte no llegue a 0, mostraremos a traves del Platform.runLater en
+     * otro hilo del procesador un contador del tiempo en minutos y segundos que
+     * imprimira el label, para que el label se ejecute de forma paralela a la
+     * partida, y iremos restando el tiempo. Finalmente, cuando el tiempo sea 0,
+     * entraremos al else y cambiaremos el label a "Tiempo finalizado!"; La
+     * tarea del timer la cancelaremos para que se deje de ejecutar en esta
+     * ultima vuelta y finalmente en otro hilo mostraremos una ventana
+     * informativa, y al aceptarla llamaremos al metodo GoToMain que nos llevara
+     * a la pantalla de Main. Dentro del método GoToMain tenemos tambien la
+     * cancelación de la tarea para que se cancele si llamamos al metodo mucho
+     * antes.
+     */
     public void RunTimer() {
         timer = new Timer();
 

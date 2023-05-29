@@ -188,7 +188,7 @@ public class PartidaJuegoController implements Initializable {
 
             System.out.print("\nIDPARTIDA: " + idPartida + " PUNTUACIONACTUAL: " + puntuacionActual + "\n");
 
-            partida.añadirPuntosPartida(idPartida, cartaCount);
+            partida.aniadirPuntosPartida(idPartida, cartaCount);
             GoToMain();
 
         }
